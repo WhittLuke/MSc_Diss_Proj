@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MSc Project: London Traffic Counts</title>
+
+
+    <!-- Imports for utilising the HTML tags
+
+        Specify that we are using JavaScript, that we are using the style.css script,
+        and that we are using the functionality of dataVisApp.js -->
+
+    <script language="JavaScript"></script>
+
+    <script src="style.css" type="text/css"></script>
+    <script src="dataVisApp.js" type="text/javascript"></script>
+
+
+    <style>
+
+        /* For some reason this was not working when I placed it in the style.css script */
+        #selBoroughs{
+
+            margin-left: 8px;
+            color: #6495ED;
+            font-family: sans-serif;
+            font-size: 11px;
+            border: none;
+        }
+        label{
+            font-size: 14px;
+            font-family: sans-serif;
+            color: #FF6347;
+            padding-bottom: 20px;
+        }
+        #selYear{
+            margin-left: 70px;
+            margin-top: 10px;
+            color: #6495ED;
+            font-family: sans-serif;
+            font-size: 13px;
+            border: none;
+        }
+        #selVehicle{
+            margin-top: 10px;
+            margin-left: 100px;
+            font-family: sans-serif;
+            color: #6495ED;
+            font-size: 13px;
+            border: none;
+        }
+        #selRoad{
+            margin-top: 10px;
+            margin-left: 100px;
+            font-family: sans-serif;
+            font-size: 18px;
+            color: #6495ED;
+            border: none;
+        }
+        #submitData{
+            font-size: 20px;
+            color: #FF6347;
+            font-family: sans-serif;
+            margin-left: 110px;
+            border: none;
+        }
+
+
+    </style>
+
+
+    <!-- Here we can import D3 and Leaflet. Come back to this part at a later date -->
+
+</head>
+
+<body>
+
+    <!-- Add list boxes for boroughs, years, vehicles, and roads to allow the user to alter the traffic data they
+         see. -->
+    <!-- <label>Choose a London borough:</label> -->
+    <select id="selBoroughs" multiple = "multiple" size = "5" onclick="getBorough()">
+
+        <option value = "B&D">Barking and Dagenham</option>
+        <option value = "barnet">Barnet</option>
+        <option value = "bexley">Bexley</option>
+        <option value = "brent">Brent</option>
+        <option value = "bromley">Bromley</option>
+        <option value = "camden">Camden</option>
+        <option value = "CoL">City of London</option>
+        <option value = "croydon">Croydon </option>
+        <option value = "ealing">Ealing</option>
+        <option value = "enfield">Enfield</option>
+        <option value = "greenwich">Greenwich</option>
+        <option value = "hackney">Hackney</option>
+        <option value = "H&F">Hammersmith and Fulham</option>
+        <option value = "haringey">Haringey</option>
+        <option value = "harrow">Harrow</option>
+        <option value = "havering">Havering</option>
+        <option value = "hillingdon">Hillingdon</option>
+        <option value = "hounslow">Hounslow</option>
+        <option value = "islington">Islington</option>
+        <option value = "K&C">Kensington and Chelsea</option>
+        <option value = "KUT">Kingston upon Thames</option>
+        <option value = "lambeth">Lambeth</option>
+        <option value = "lewisham">Lewisham</option>
+        <option value = "merton">Merton</option>
+        <option value = "newham">Newham</option>
+        <option value = "redbridge">Redbridge</option>
+        <option value = "RUT">Richmond upon Thames</option>
+        <option value = "southwark">Southwark</option>
+        <option value = "sutton">Sutton</option>
+        <option value = "TH">Tower Hamlets</option>
+        <option value = "WF">Waltham Forest</option>
+        <option value = "wandsworth">Wandesworth</option>
+        <option value = "westminster">Westminster</option>
+
+    </select>
+
+
+    <!-- <label>Select a Year: </label> -->
+    <select id = "selYear" multiple = "multiple" size = "5">
+
+        <option value = "2010">2010</option>
+        <option value = "2010">2011</option>
+        <option value = "2010">2012</option>
+        <option value = "2010">2013</option>
+        <option value = "2010">2014</option>
+        <option value = "2010">2015</option>
+        <option value = "2010">2016</option>
+
+    </select>
+
+
+    <!-- <label>Select a form of transport: </label> -->
+    <select id = "selVehicle" multiple = "multiple" size = 5>
+
+        <option value = "PC">Bicycles</option>
+        <option value = "2WMV">Motor Vehicles</option>
+        <option value = "car">Car</option>
+        <option value = "bus">Bus</option>
+        <option value = "LGV">Light Goods Vehicles</option>
+        <option value = "HGV">Heavy Goods Vehicles</option>
+        <option value = "AMV">All Motor Vehicles</option>
+
+    </select>
+
+    <!-- <label>Choose type of Road: </label> -->
+    <select id = "selRoad" multiple = "multiple" size = "2">
+
+        <option value = "major">Major Roads</option>
+        <option value = "minor">Minor Roads</option>
+
+    </select>
+
+    <button id="submitData" onclick = "getUsersSearch()">Submit</button>
+
+
+
+    <div id="dataMap"></div>
+    <div id="barChart"></div>
+</body>
+</html>
