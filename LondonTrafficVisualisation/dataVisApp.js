@@ -9,19 +9,24 @@ var road_type = "";
 
 
 function getBorough(){
-    borough = document.getElementById("selBorough");
-    console.log(borough);
+    borough = document.getElementById("selBoroughs").value;
+    console.log("Borough: " + borough);
 }
 
-// function getUsersSearch(){
-//
-//     borough = document.getElementById("selBorough");
-//     year = document.getElementById("selYear");
-//     vehicle = document.getElementById("selVehicle");
-//     road_type = document.getElementById("selRoad");
-//
-//     console.log(borough);
-//     console.log(year);
-//     console.log(vehicle);
-//     console.log(road_type);
-// }
+function getYear(){
+
+    year = document.getElementById("selYear").value;
+    console.log("Year: " + year);
+}
+
+function getVehicleType(){
+
+    vehicle = document.getElementById("selVehicle").value;
+    console.log("Vehicle Type: " + vehicle);
+}
+
+function getRoadType(){
+
+    road_type = document.getElementById("selRoad").value;
+    console.log("Road Type: " + road_type);
+}
