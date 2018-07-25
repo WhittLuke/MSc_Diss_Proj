@@ -1,8 +1,8 @@
 
 // First we will need to load the Leaflet map on to the webpage
-var map = L.map('map', {center: [20.0, 5.0],
+var map = L.map('map', {center: [51.505, -0.09],
   minZoom: 2,
-  zoom: 3
+  zoom: 11
   });
 
 // L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -31,7 +31,10 @@ var londonData = L.geoCsv(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: "test_marker.png",
-				iconSize: [25,41]
+				shadowUrl: "marker-shadow.png",
+				iconSize: [25,41],
+				shadowSize: [41,41],
+				shadowAnchor: [13,20]
 			})
 		});
 	},
@@ -43,14 +46,15 @@ var londonData = L.geoCsv(null, {
 $.ajax({
 	type: 'GET',
 	dataType: 'text',
-	data: 'Year2010_geoCsv.csv',
-	error: function(){
+	url: 'Year2010_geoCsv.csv',
+	error: function(e){
+		console.log(e);
 		alert('No data available');
 	},
 	// This should add the data from the CSV file to the map tile
 	success: function(csv){
-		data = londonData.addData(csv);
-	 	map.addLayer(data)
+		londonData.addData(csv);
+	 	map.addLayer(londonData)
 	 }
 });
 
