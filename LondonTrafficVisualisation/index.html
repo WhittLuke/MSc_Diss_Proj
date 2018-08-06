@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>MSc Project: London Traffic Counts</title>
 
 
@@ -10,66 +10,95 @@
         Specify that we are using JavaScript, that we are using the style.css script,
         and that we are using the functionality of dataVisApp.js -->
 
-    <script language="JavaScript"></script>
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 
-    <script src="style.css" type="text/css"></script>
-    <script src="dataVisApp.js" type="text/javascript"></script>
+    <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js'></script>
 
+
+    <!-- Load in the MarkerCluster files located within the Leaflet.markercluster-1.3.0 folder 
+         The files will be located within the dist folder too -->
+    <link rel="stylesheet" type="text/css" src="Leaflet.markercluster-1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" type="text/css" src="Leaflet.markercluster-1.3.0/dist/MarkerCluster.Default.css" />
+    <script type="text/javascript" src="Leaflet.markercluster-1.3.0/dist/leaflet.markercluster-src.js"></script>
+
+    <script type='text/javascript' src='Leaflet.geoCSV/leaflet.geocsv.js'></script>
+
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+    
 
     <style>
 
         /* For some reason this was not working when I placed it in the style.css script */
-        #selBoroughs{
+        #selBoroughs
+        {
 
             margin-left: 8px;
+            margin-bottom: 15px;
             color: #FF6347;
             font-family: sans-serif;
             font-size: 12px;
             border: none;
         }
-        label{
+        /*label{
             font-size: 14px;
             font-family: sans-serif;
             color: #FF6347;
             padding-bottom: 20px;
-        }
-        #selYear{
+        }*/
+        #selYear
+        {
             margin-left: 70px;
             margin-top: 10px;
+            margin-bottom: 15px;
             color: #A0522D;
             font-family: sans-serif;
             font-size: 13px;
             border: none;
         }
-        #selVehicle{
+        #selVehicle
+        {
             margin-top: 10px;
             margin-left: 100px;
+            margin-bottom: 15px;
             font-family: sans-serif;
             color: #000080;
             font-size: 13px;
             border: none;
         }
-        #selRoad{
+        #selRoad
+        {
             margin-top: 10px;
             margin-left: 100px;
+            margin-bottom: 15px;
             font-family: sans-serif;
             font-size: 18px;
             color: #006400;
             border: none;
         }
-        #submitData{
-            font-size: 20px;
-            color: #FF6347;
-            font-family: sans-serif;
-            margin-left: 110px;
+        #submitData
+        {
+            margin-left: 80px;
+            margin-bottom: 15px;
+            width: 60px;
+            height: 40px;
+            font-size: 12px;
             border: none;
+            outline: none;
+        }
+        #map
+        {
+            padding-top: 300px;
+            width: 100%;
+            height: 270px;
+            border: 1px solid;
+        }
+        #refreshButton
+        {
+            margin-bottom: 20px;
         }
 
 
     </style>
-
-
-    <!-- Here we can import D3 and Leaflet. Come back to this part at a later date -->
 
 </head>
 
@@ -78,47 +107,47 @@
     <!-- Add list boxes for boroughs, years, vehicles, and roads to allow the user to alter the traffic data they
          see. -->
     <!-- <label>Choose a London borough:</label> -->
-    <select id="selBoroughs" multiple = "multiple" size = "5" onchange="getBorough();">
+    <select id="selBoroughs" multiple = "multiple" size = "5" >
 
-        <option value = "Barking and Dagenham">Barking and Dagenham</option>
-        <option value = "Barnet">Barnet</option>
-        <option value = "Bexley">Bexley</option>
-        <option value = "Brent">Brent</option>
-        <option value = "Bromley">Bromley</option>
-        <option value = "Camden">Camden</option>
-        <option value = "City of London">City of London</option>
-        <option value = "Croydon">Croydon </option>
-        <option value = "Ealing">Ealing</option>
-        <option value = "Enfield">Enfield</option>
-        <option value = "Greenwich">Greenwich</option>
-        <option value = "Hackney">Hackney</option>
-        <option value = "Hammersmith and Fulham">Hammersmith and Fulham</option>
-        <option value = "Haringey">Haringey</option>
-        <option value = "Harrow">Harrow</option>
-        <option value = "Havering">Havering</option>
-        <option value = "Hillingdon">Hillingdon</option>
-        <option value = "Hounslow">Hounslow</option>
-        <option value = "Islington">Islington</option>
-        <option value = "Kensington and Chelsea">Kensington and Chelsea</option>
-        <option value = "Kingston upon Thames">Kingston upon Thames</option>
-        <option value = "Lambeth">Lambeth</option>
-        <option value = "Lewisham">Lewisham</option>
-        <option value = "Merton">Merton</option>
-        <option value = "Newham">Newham</option>
-        <option value = "Redbridge">Redbridge</option>
-        <option value = "Richmond upon Thames">Richmond upon Thames</option>
-        <option value = "Southwark">Southwark</option>
-        <option value = "Sutton">Sutton</option>
-        <option value = "Tower Hamlets">Tower Hamlets</option>
-        <option value = "Waltham Forest">Waltham Forest</option>
-        <option value = "Wandsworth">Wandesworth</option>
-        <option value = "Westminster">Westminster</option>
+        <option value = "Barking_and_Dagenham/">Barking and Dagenham</option>
+        <option value = "Barnet/">Barnet</option>
+        <option value = "Bexley/">Bexley</option>
+        <option value = "Brent/">Brent</option>
+        <option value = "Bromley/">Bromley</option>
+        <option value = "Camden/">Camden</option>
+        <option value = "City_of_London/">City of London</option>
+        <option value = "Croydon/">Croydon </option>
+        <option value = "Ealing/">Ealing</option>
+        <option value = "Enfield/">Enfield</option>
+        <option value = "Greenwich/">Greenwich</option>
+        <option value = "Hackney/">Hackney</option>
+        <option value = "Hammersmith_and_Fulham/">Hammersmith and Fulham</option>
+        <option value = "Haringey/">Haringey</option>
+        <option value = "Harrow/">Harrow</option>
+        <option value = "Havering/">Havering</option>
+        <option value = "Hillingdon/">Hillingdon</option>
+        <option value = "Hounslow/">Hounslow</option>
+        <option value = "Islington/">Islington</option>
+        <option value = "Kensington_and_Chelsea/">Kensington and Chelsea</option>
+        <option value = "Kingston_upon_Thames/">Kingston upon Thames</option>
+        <option value = "Lambeth/">Lambeth</option>
+        <option value = "Lewisham/">Lewisham</option>
+        <option value = "Merton/">Merton</option>
+        <option value = "Newham/">Newham</option>
+        <option value = "Redbridge/">Redbridge</option>
+        <option value = "Richmond_upon_Thames/">Richmond upon Thames</option>
+        <option value = "Southwark/">Southwark</option>
+        <option value = "Sutton/">Sutton</option>
+        <option value = "Tower_Hamlets/">Tower Hamlets</option>
+        <option value = "Waltham_Forest/">Waltham Forest</option>
+        <option value = "Wandsworth/">Wandesworth</option>
+        <option value = "Westminster/">Westminster</option>
 
     </select>
 
 
     <!-- <label>Select a Year: </label> -->
-    <select id = "selYear" multiple = "multiple" size = "5" onchange="getYear();">
+    <select id = "selYear" multiple = "multiple" size = "5" >
 
         <option value = "2010">Year 2010</option>
         <option value = "2011">Year 2011</option>
@@ -132,7 +161,7 @@
 
 
     <!-- <label>Select a form of transport: </label> -->
-    <select id = "selVehicle" multiple = "multiple" size = 5 onchange="getVehicleType();">
+    <!-- <select id = "selVehicle" multiple = "multiple" size = 5 >
 
         <option value = "PC">Bicycles</option>
         <option value = "2WMV">Motor Vehicles</option>
@@ -142,17 +171,56 @@
         <option value = "HGV">Heavy Goods Vehicles</option>
         <option value = "AMV">All Motor Vehicles</option>
 
-    </select>
+    </select> -->
 
     <!-- <label>Choose type of Road: </label> -->
-    <select id = "selRoad" multiple = "multiple" size = "2" onchange="getRoadType();">
+    <select id = "selRoad" multiple = "multiple" size = "2" >
 
         <option value = "Major_Roads">Major Roads</option>
         <option value = "Minor_Roads">Minor Roads</option>
 
     </select>
 
-    <div id="dataMap"></div>
-    <div id="barChart"></div>
+
+    <select id = "submitData" multiple = "multiple" size = "1" onclick="getUserRequestedData();">
+
+        <option value = "submit">Submit</option>
+
+    </select>
+
+
+    <!-- Add a refresh button that will allow the user to remove markers from the screen -->
+    <input type="button" value="Refresh Page" id="refreshButton" onClick="window.location.reload()">
+
+
+
+    <!--<button type="button" id="submitData" onchange="getUserRequestedData()"> Submit </button>-->
+
+    <!--<script>-->
+
+        <!--var borough = "",-->
+            <!--year = "",-->
+            <!--vehicle = "",-->
+            <!--road_type = "";-->
+
+
+
+        <!--function getUserRequestedData(){-->
+
+            <!--borough = document.getElementById("selBoroughs").value;-->
+            <!--year = document.getElementById("selYear").value;-->
+            <!--vehicle = document.getElementById("selVehicle").value;-->
+            <!--road_type = document.getElementById("selRoad").value;-->
+
+            <!--console.log("Road type (from getRequestedData()" + vehicle);-->
+            <!--console.log("/usrs/local/" + road_type + "/" + borough + "/Year" + year + ".csv");-->
+
+        <!--}-->
+
+    <!--</script>-->
+
+
+    <div id="map"></div>
+    <script type = "text/javascript" src = "dataVisApp.js"></script>
 </body>
 </html>
