@@ -2,9 +2,7 @@
 // Global variables go here!!
 var borough = "";
 var year = "";
-// var vehicle = "";
 var road_type = "";
-// var file_path = "/Users/lukewhittaker/Desktop/MSc_Data_Science_Project_Data/London_Traffic_Data/Cleaned_Data/MSc_Diss_Proj/LondonTrafficVisualisation/data/";
 
 // TODO: Add the Leaflet map to the web page
 // Try and add the map to the web page
@@ -55,50 +53,8 @@ function getUserRequestedData()
  
     else
     {
-        // Try this code when we can finally access the data
-        // map.removeLayer(londonData);
-
-        // L.marker([51.58907823999999906, -0.20425690499999999]).addTo(map)
-        //     .bindPopup("Popup within the getUserRequestedData()");
-
-        // L.marker([51.505, -0.09]).addTo(map)
-        //     .bindPopup('Second marker at this point')
-            // .openPopup();
-
-        // var londonData = L.geoCsv(null, {
-        //     onEachFeature: function(feature, layer)
-        //     {
-        //         // Instantiate the a string to be used as the popup message to the user
-        //         var popup = "";
-        //         for (var feat in feature.properties)
-        //         {
-        //             var title = londonData.getPropertyTitle(feat);
-        //             popup += "<b>" + title + "<b><br />" + feature.properties[feat] + "<br /><br />";
-        //             console.log("Hello World");
-        //         }
-        //         layer.bindPopup(popup);
-        //     },
-
-        //     // This part should place all of the data at the lat long points
-        //     pointToLayer: function(feature, latlng)
-        //     {
-        //         return L.marker(latlng, {
-        //             icon: L.icon({
-        //                 iconurl: "test_marker.png",
-        //                 shadowurl: "marker_shadow.png",
-        //                 iconSize: [50,70],
-        //                 shadowSize: [41,41],
-        //                 showdowAnchor: [13,20]
-        //             })
-        //         });
-        //     },
-        //     firstLineTitles: true
-        // });
-
-
         var dataPathString = "data/" + road_type + "/" + borough + "Year" + year + ".json";
-        console.log(dataPathString); 
-
+        
         $.ajax({
             type: 'GET',
             url: dataPathString,
@@ -111,70 +67,13 @@ function getUserRequestedData()
             },
             success: function(jsonData)
             {
-                // Try and use the MarkerCluster to bind all the points to their own cluster
-                //console.log(csv);
-                
-
-                //console.log(csv);
-
                 // Maybe try and call a function that will be passed the csv data
                 displayData(jsonData);
-
-
-
-
-
-          //       var londonData = L.geoCsv(null, 
-          //       {
-
-		        //     firstLineTitles: true,
-		        //     fieldSeparator: ",",
-
-		        //     onEachFeature: function(feature, layer)
-		        //     {
-		        //         // Instantiate the a string to be used as the popup message to the user
-		        //         var popup = "";
-		        //         for (var feat in feature.properties)
-		        //         {
-		        //             var title = londonData.getPropertyTitle(feat);
-		        //             popup += "<b>" + title + "<b><br />" + feature.properties[feat] + "<br /><br />";
-		        //             console.log("Hello World");
-		        //         }
-		        //         layer.bindPopup(popup);
-		            
-		        //     }, // End of onEachFeature
-
-		        //     // This part should place all of the data at the lat long points
-		        //     pointToLayer: function(feature, latlng)
-		        //     {
-		        //         return L.marker(latlng, 
-		        //         {
-		        //             icon: L.icon({
-		        //                 iconurl: "test_marker.png",
-		        //                 shadowurl: "marker_shadow.png",
-		        //                 iconSize: [50,70],
-		        //                 shadowSize: [41,41],
-		        //                 showdowAnchor: [13,20]
-		        //             })
-
-		        //         }); // End of return marker
-		            
-		        //     }, // End of PointToLayer
-
-		        // }); // End of geoCsv function
-
-
-		        // var markerClusters = new L.MarkerClusterGroup();
-          //       londonData.addData(csv);
-          //       markerClusters.addLayer(londonData);
-
-          //       // Then we can try and add the layer with all the data on to the map
-          //       map.addLayer(markerClusters);
-          //       map.fitBounds(markerClusters.getBounds());
 
             } // End of success
 
         }); // End of AJAX call
+
 
         function displayData(data)
         {
